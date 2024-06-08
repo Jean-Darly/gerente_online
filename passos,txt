@@ -1,0 +1,2 @@
+php artisan make:controller NomeDoController//primeira letra maiúscula - convessao
+php artisan make:model NomeDoModel
