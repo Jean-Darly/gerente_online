@@ -27,6 +27,5 @@ class InsertPersonController extends Controller
         // $person->save();
 
         return redirect()->route('welcome');
-        print("ok");
     }
 }
