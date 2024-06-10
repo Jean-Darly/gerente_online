@@ -1,0 +1,32 @@
+Aqui estão os 10 principais comandos `php artisan` básicos:
+
+| Comando                                       | Descrição                                                                 |
+| ---                                           | ---                                                                       |
+| `php artisan serve`                           | Inicia um servidor de desenvolvimento no endereço padrão, localhost:8000. |
+| `php artisan make:controller NomeController`  | Cria uma nova controladora com o nome especificado.                       |
+| `php artisan make:model NomeModel`            | Cria uma nova modelo com o nome especificado.                             |
+| `php artisan migrate`                         | Executa as migrações do banco de dados.                                   |
+| `php artisan db`                              | Gerencia o banco de dados, incluindo criação e execução de migrações.     |
+| `php artisan make:console HelloWorld`         | Cria um novo comando Artisan com o nome especificado.                     |
+| `php artisan optimize`                        | Otimiza a aplicação, limpando cache e outras tarefas.                     |
+| `php artisan cache`                           | Gerencia o cache da aplicação.                                            |
+| `php artisan config`                          | Gerencia as configurações da aplicação.                                   |
+| `php artisan route`                           | Gerencia as rotas da aplicação.                                           |
+| `php artisan tinker`                          | Abre o Laravel Tinker, um ambiente de desenvolvimento interativo.         |
+
+Esses comandos são fundamentais para o desenvolvimento de aplicações com Laravel e são frequentemente utilizados durante o ciclo de vida de um projeto.
+
+Claro, aqui está uma tabela com alguns dos comandos básicos do Git:
+
+| Comando                                       | Descrição                                                                 |
+| ---                                           | ---                                                                       |
+| `git init`                                    | Inicializa um novo repositório Git.                                       |
+| `git clone [url]`                             | Clona um repositório existente.                                           |
+| `git add [arquivo]`                           | Adiciona um arquivo ao índice.                                            |
+| `git commit -m "[mensagem]"`                  | Faz um commit das alterações com uma mensagem.                            |
+| `git status`                                  | Mostra o status do repositório.                                           |
+| `git pull`                                    | Atualiza o repositório local com as alterações do repositório remoto.     |
+| `git push`                                    | Envia as alterações locais para o repositório remoto.                     |
+| `git branch`                                  | Lista todas as branches.                                                  |
+| `git checkout [branch]`                       | Muda para uma branch específica.                                          |
+| `git merge [branch]`                          | Mescla a branch especificada com a branch atual.                          |
