@@ -14,7 +14,7 @@ Route::get('/person', [InsertPersonController::class, 'index']);
 Route::get('/person', [InsertPersonController::class, 'store']);
 
 Route::group(['prefix' => 'pessoas'], function () {
-    Route::get('/store', [PessoaController::class, 'store'])->name('pessoas.store');
+    Route::post('/store', [PessoaController::class, 'store'])->name('pessoas.store');
     Route::get('/create', [PessoaController::class, 'create'])->name('pessoas.create');
     Route::get('/edit', [PessoaController::class, 'edit'])->name('pessoas.edit');
     Route::put('/update', [PessoaController::class, 'update'])->name('pessoas.update');
