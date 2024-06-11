@@ -7,5 +7,6 @@
 @section('content')
 <div class="container">
     <h1>index etiqueta</h1>
+    @include('etiqueta.listaEtiquetas', ['etiquetas' => $etiquetas])
 </div>
 @endsection

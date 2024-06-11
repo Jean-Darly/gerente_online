@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\InsertPersonController;
 use App\Http\Controllers\PessoaController;
-use App\Http\Controllers\EtiquetaController;
+use App\Http\Controllers\UtilidadesEtiquetasNomesTableController AS UtNameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
@@ -26,19 +26,23 @@ Route::group(['prefix' => 'pessoas'], function () {
 Route::group(['prefix' => 'etiqueta'], function () {
 
     // Rota Index
-    Route::get('/', [EtiquetaController::class, 'index'])->name('etiqueta.index');
+    Route::get('/', [UtNameController::class, 'index'])->name('etiqueta.index');
 
     // Rotas de criação
-    Route::get('/create', [EtiquetaController::class, 'create'])->name('etiqueta.create');
-    Route::post('/store', [EtiquetaController::class, 'store'])->name('etiqueta.store');
+    Route::get('/create', [UtNameController::class, 'create'])->name('etiqueta.create');
+    Route::post('/store', [UtNameController::class, 'store'])->name('etiqueta.store');
 
     // Rotas de edição
-    Route::get('/edit', [EtiquetaController::class, 'edit'])->name('etiqueta.edit');
-    Route::put('/update', [EtiquetaController::class, 'update'])->name('etiqueta.update');
+    Route::get('/{id}/edit', [UtNameController::class, 'edit'])->name('etiqueta.edit'); // Usando o ID do registro
+    Route::put('/{id}/update', [UtNameController::class, 'update'])->name('etiqueta.update'); // Usando o ID do registro
+
+    // Rota de exclusão
+    Route::delete('/{id}/delete', [UtNameController::class, 'destroy'])->name('etiqueta.delete'); // Usando o ID do registro
 
     // Rotas de impressão
-    Route::put('/print', [EtiquetaController::class, 'print'])->name('etiqueta.print');
+    Route::put('/{id}/print', [UtNameController::class, 'print'])->name('etiqueta.print'); // Usando o ID do registro
 
     // ... outras rotas para gerenciar etiqueta
 });
+
 

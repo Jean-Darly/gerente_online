@@ -5,40 +5,49 @@
 @section('title', 'Edição de Usuários')
 
 @section('content')
-    <form action="{{ route('pessoas.update') }}" method="post">
-        @csrf
-        @method('PUT')
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Idade</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($pessoas as $pessoa)
-                    <tr>
-                        <td>{{ $pessoa->id }}</td>
-                        <td>
-                            <input type="text" class="form-control" id="nome_{{ $pessoa->id }}" name="{{ $pessoa->id }}[nome]" value="{{ $pessoa->nome }}">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="idade_{{ $pessoa->id }}" name="{{ $pessoa->id }}[idade]" value="{{ $pessoa->idade }}">
-                        </td>
-                        <td>
-                            <select class="form-select" name="{{ $pessoa->id }}[status]">
-                                <option value="1" {{ $pessoa->status == 1 ? 'selected' : '' }}>Ativo</option>
-                                <option value="0" {{ $pessoa->status == 0 ? 'selected' : '' }}>Inativo</option>
-                            </select>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="d-flex justify-content-end">
-            <input type="submit" class="btn btn-primary" value="Editar Todos">
+    <!-- Formulário para editar e deletar -->
+    <div class="container">
+        <h2 class="text-center">Editar e Deletar</h2>
+        <form method="post" action="{{ route('etiqueta.update', $etiqueta->id) }}">
+            @csrf
+            @method('PUT')
+            <div class="row mb-3">
+                <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{ $etiqueta->nome }}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="actions" class="col-sm-2 col-form-label">Ações</label>
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">Deletar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal para deletar -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Deletar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Você tem certeza que deseja deletar o registro {{ $etiqueta->nome }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form method="post" action="{{ route('etiqueta.delete', $etiqueta->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
 @endsection
