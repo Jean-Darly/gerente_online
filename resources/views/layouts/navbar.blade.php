@@ -17,9 +17,9 @@
                         Etiqueta
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/create">Incluir</a>
-                        <a class="dropdown-item" href="/editar">Editar</a>
-                        <a class="dropdown-item" href="/print">Imprimir</a>
+                        <a class="dropdown-item" href="/etiqueta/create">Incluir</a>
+                        <a class="dropdown-item" href="/etiqueta/editar">Editar</a>
+                        <a class="dropdown-item" href="/etiqueta/print">Imprimir</a>
                     </div>
                 </li>
                 <li class="nav-item">

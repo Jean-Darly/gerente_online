@@ -20,12 +20,25 @@ Route::group(['prefix' => 'pessoas'], function () {
     Route::put('/update', [PessoaController::class, 'update'])->name('pessoas.update');
     // ... outras rotas para gerenciar pessoas
 });
+// routes/web.php
+
+
 Route::group(['prefix' => 'etiqueta'], function () {
+
+    // Rota Index
     Route::get('/', [EtiquetaController::class, 'index'])->name('etiqueta.index');
+
+    // Rotas de criação
     Route::get('/create', [EtiquetaController::class, 'create'])->name('etiqueta.create');
+    Route::post('/store', [EtiquetaController::class, 'store'])->name('etiqueta.store');
+
+    // Rotas de edição
     Route::get('/edit', [EtiquetaController::class, 'edit'])->name('etiqueta.edit');
     Route::put('/update', [EtiquetaController::class, 'update'])->name('etiqueta.update');
+
+    // Rotas de impressão
     Route::put('/print', [EtiquetaController::class, 'print'])->name('etiqueta.print');
-    // ... outras rotas para gerenciar pessoas
+
+    // ... outras rotas para gerenciar etiqueta
 });
 
