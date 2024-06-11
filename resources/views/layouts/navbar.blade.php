@@ -13,14 +13,23 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/etiqueta" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="/etiqueta" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Etiqueta
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {{-- etiqueta nomes --}}
+                        <h6 class="dropdown-header bg-secondary text-black">Nomes</h6>
                         <a class="dropdown-item" href="/etiqueta">Lista</a>
                         <a class="dropdown-item" href="/etiqueta/create">Incluir</a>
                         <a class="dropdown-item" href="/etiqueta/editar">Editar</a>
-                        <a class="dropdown-item" href="/etiqueta/print">Imprimir</a>
+                        {{-- Divisória --}}
+                        <div class="dropdown-divider"></div>
+                        {{-- Carrinho etiquetas --}}
+                        <h6 class="dropdown-header bg-secondary text-black">Carrinho Etiquetas</h6>
+                        <a class="dropdown-item" href="/carrinhoEtiqueta/create">Criar</a>
+                        <a class="dropdown-item" href="/carrinhoEtiqueta/edit">Editar</a>
+                        <a class="dropdown-item" href="/carrinhoEtiqueta/print">Imprimir</a>
                     </div>
                 </li>
                 <li class="nav-item">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\InsertPersonController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\UtilidadesEtiquetasNomesTableController AS UtNameController;
+use App\Http\Controllers\UtilidadesEtiquetasTableController AS UtController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
@@ -21,7 +22,6 @@ Route::group(['prefix' => 'pessoas'], function () {
     // ... outras rotas para gerenciar pessoas
 });
 // routes/web.php
-
 
 Route::group(['prefix' => 'etiqueta'], function () {
 
@@ -43,6 +43,29 @@ Route::group(['prefix' => 'etiqueta'], function () {
     Route::put('/{id}/print', [UtNameController::class, 'print'])->name('etiqueta.print'); // Usando o ID do registro
 
     // ... outras rotas para gerenciar etiqueta
+});
+
+
+Route::group(['prefix' => 'carrinhoEtiqueta'], function () {
+
+    // Rota Index
+    Route::get('/', [UtController::class, 'index'])->name('carrinhoEtiqueta.index');
+
+    // Rotas de criação
+    Route::get('/create', [UtController::class, 'create'])->name('carrinhoEtiqueta.create');
+    Route::post('/store', [UtController::class, 'store'])->name('carrinhoEtiqueta.store');
+
+    // Rotas de edição
+    Route::get('/{id}/edit', [UtController::class, 'edit'])->name('carrinhoEtiqueta.edit'); // Usando o ID do registro
+    Route::put('/{id}/update', [UtController::class, 'update'])->name('carrinhoEtiqueta.update'); // Usando o ID do registro
+
+    // Rota de exclusão
+    Route::delete('/{id}/delete', [UtController::class, 'destroy'])->name('carrinhoEtiqueta.delete'); // Usando o ID do registro
+
+    // Rota de impressão
+    Route::put('/{id}/print', [UtController::class, 'print'])->name('carrinhoEtiqueta.print'); // Usando o ID do registro
+
+    // ... outras rotas para gerenciar carrinhoEtiqueta
 });
 
 
