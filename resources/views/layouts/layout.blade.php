@@ -45,6 +45,7 @@
     </script>
     @include('layouts.main')
     @include('layouts.footer')
+    <script src="{{ asset('js/autocomplete.js') }}"></script>
 </body>
 
 </html>

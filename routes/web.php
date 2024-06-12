@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\InsertPersonController;
 use App\Http\Controllers\PessoaController;
-use App\Http\Controllers\UtilidadesEtiquetasNomesTableController AS UtNameController;
-use App\Http\Controllers\UtilidadesEtiquetasTableController AS UtController;
+use App\Http\Controllers\UtilidadesEtiquetasNomesTableController as UtNameController;
+use App\Http\Controllers\UtilidadesEtiquetasTableController as UtController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
@@ -42,6 +42,8 @@ Route::group(['prefix' => 'etiqueta'], function () {
     // Rotas de impressão
     Route::put('/{id}/print', [UtNameController::class, 'print'])->name('etiqueta.print'); // Usando o ID do registro
 
+    // Rota de autocomplete
+    Route::get('/autocomplete', [UtNameController::class, 'autocomplete'])->name('etiqueta.autocomplete');
     // ... outras rotas para gerenciar etiqueta
 });
 
@@ -67,5 +69,3 @@ Route::group(['prefix' => 'carrinhoEtiqueta'], function () {
 
     // ... outras rotas para gerenciar carrinhoEtiqueta
 });
-
-

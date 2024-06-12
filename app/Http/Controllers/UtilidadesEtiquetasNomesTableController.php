@@ -54,4 +54,27 @@ class UtilidadesEtiquetasNomesTableController extends Controller
 
         return redirect()->route('etiqueta.index')->with('success', 'Registro excluído com sucesso!');
     }
+    public function autocomplete(Request $request)
+    {
+        $term = $this->removeAccents($request->term);
+        $etiquetas = UtilidadesEtiquetasNomesTable::where('nome', 'LIKE', '%' . $term . '%')->get(['id', 'nome as value']);
+        $results = [];
+        foreach ($etiquetas as $etiqueta) {
+            $results[] = [
+                'id' => $etiqueta->id,
+                'value' => $etiqueta->nome,
+            ];
+        }
+
+        return response()->json($etiquetas);
+    }
+
+    private function removeAccents($str)
+    {
+        return preg_replace(
+            array('/[áàâãäå]/u', '/[ÁÀÂÃÄÅ]/u', '/[éèêë]/u', '/[ÉÈÊË]/u', '/[íìîï]/u', '/[ÍÌÎÏ]/u', '/[óòôõö]/u', '/[ÓÒÔÕÖ]/u', '/[úùûü]/u', '/[ÚÙÛÜ]/u', '/[ç]/u', '/[Ç]/u', '/[ñ]/u', '/[Ñ]/u'),
+            array('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U', 'c', 'C', 'n', 'N'),
+            $str
+        );
+    }
 }
