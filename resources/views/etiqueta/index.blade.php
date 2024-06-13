@@ -5,9 +5,7 @@
 @section('title', 'Etiqueta')
 
 @section('content')
-    <div class="container">
-        <h1>index etiqueta</h1>
-        @include('etiqueta.listaEtiquetas', ['etiquetas' => $etiquetas])
-        @include('etiqueta.autocomplete')
-    </div>
+<div class="container">
+    @include('etiqueta.listaEtiquetas', ['etiquetas' => $etiquetas])
+</div>
 @endsection

@@ -1,8 +1,10 @@
 <!-- resources/views/layouts/main.blade.php -->
-<div class="container">
-    <!-- Conteúdo da navegação -->
+
+<!-- Conteúdo da navegação -->
+<header class="text-white p-0 w-100">
     @include('layouts.navbar')
-</div>
+</header>
+
 <div class="container">
     <!-- Conteúdo da página -->
     @yield('content')

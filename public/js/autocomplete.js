@@ -1,7 +1,8 @@
+// public/js/autocomplete.js
+
 $(document).ready(function() {
-    $("#etiqueta").autocomplete({
+    $("#nome").autocomplete({
       source: function(request, response) {
-        console.log("Termo de pesquisa: ", request.term); // Adiciona um log aqui
         $.ajax({
           url: "/etiqueta/autocomplete",
           dataType: "json",
@@ -9,18 +10,14 @@ $(document).ready(function() {
             term: request.term
           },
           success: function(data) {
-            console.log("Dados recebidos: ", data); // E aqui
             response(data);
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.error("Erro na requisição: ", textStatus, errorThrown);
           }
         });
       },
       minLength: 2,
       select: function(event, ui) {
-        $("#etiqueta").val(ui.item.value);
-        $("#etiqueta_id").val(ui.item.id);
+        $("#nome").val(ui.item.value);
+        $("#nome_id").val(ui.item.id);
         return false;
       }
     }).data("ui-autocomplete")._renderItem = function(ul, item) {
@@ -30,14 +27,14 @@ $(document).ready(function() {
     };
   
     // Evento para limpar o campo hidden quando o input é alterado
-    $("#etiqueta").on('input', function() {
-      $("#etiqueta_id").val('');
+    $("#nome").on('input', function() {
+      $("#nome_id").val('');
     });
   
     // Evento para validar o formulário
-    $("#etiquetaForm").on('submit', function(event) {
-      if ($("#etiqueta_id").val() === '') {
-        alert("Por favor, selecione uma etiqueta da lista.");
+    $("#nomeForm").on('submit', function(event) {
+      if ($("#nome_id").val() === '') {
+        alert("Por favor, selecione um nome da lista.");
         event.preventDefault(); // Impede o envio do formulário
       }
     });

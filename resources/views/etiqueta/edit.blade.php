@@ -1,31 +1,51 @@
-{{-- resources/views/pessoas/edit_multiple.blade.php --}}
+{{-- resources/views/pessoas/edit.blade.php --}}
 
 @extends('layouts.layout')
 
 @section('title', 'Edição de Usuários')
 
 @section('content')
-    <!-- Formulário para editar e deletar -->
-    <div class="container">
-        <h2 class="text-center">Editar e Deletar</h2>
-        <form method="post" action="{{ route('etiqueta.update', $etiqueta->id) }}">
-            @csrf
-            @method('PUT')
-            <div class="row mb-3">
-                <label for="nome" class="col-sm-2 col-form-label">Nome</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nome" name="nome" value="{{ $etiqueta->nome }}">
+<!-- Formulário para editar e deletar -->
+<div class="container">
+    <h2 class="text-center">Editar e Deletar</h2>
+    <div class="card">
+        <div class="card-header">
+            <h2>Criar Etiqueta</h2>
+        </div>
+        <div class="card-body">
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label for="actions" class="col-sm-2 col-form-label">Ações</label>
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">Deletar</button>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-            </div>
-        </form>
+            @endif
+            <form method="POST" action="{{ route('etiqueta.update', $etiqueta->id) }}">
+                @csrf
+                @method('PUT')
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nome" name="nome" value="{{ $etiqueta->nome }}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="actions" class="col-sm-2 col-form-label">Ações</label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">Deletar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Modal para deletar -->
@@ -50,4 +70,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

@@ -13,7 +13,7 @@
         <div class="card-body">
             <form id="etiquetaForm" method="POST" action="{{ route('etiqueta.store') }}">
                 @csrf
-                <div class="row md-12">
+                <div class="row mb-12">
                     <div class="col-md-3">
                         <label for="nome_etiquete" class="form-label">Nome Etiqueta</label>
                         @include('etiqueta.autocomplete')

@@ -13,8 +13,8 @@ class RenameTables extends Migration
      */
     public function up()
     {
-        // Schema::rename('utilidades_etiquetas_nomes_table', 'utilidades_etiquetas_nomes_tables');
-        Schema::rename('utilidades_etiquetas_table', 'utilidades_etiquetas_tables');
+        Schema::rename('utilidades_etiquetas_nomes_table', 'utilidades_etiquetas_nomes_tables');
+        // Schema::rename('utilidades_etiquetas_table', 'utilidades_etiquetas_tables');
     }
 
     /**
@@ -24,7 +24,7 @@ class RenameTables extends Migration
      */
     public function down()
     {
-        // Schema::rename('utilidades_etiquetas_nomes_tables', 'utilidades_etiquetas_nomes_table');
-        Schema::rename('utilidades_etiquetas_tables', 'utilidades_etiquetas_table');
+        Schema::rename('utilidades_etiquetas_nomes_tables', 'utilidades_etiquetas_nomes_table');
+        // Schema::rename('utilidades_etiquetas_tables', 'utilidades_etiquetas_table');
     }
 }

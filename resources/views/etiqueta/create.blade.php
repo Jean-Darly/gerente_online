@@ -1,36 +1,44 @@
-{{-- resources/views/pessoas/create.blade.php --}}
 @extends('layouts.layout')
 
 @section('title', 'Criar nome para etiqueta')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Criar Etiqueta</div>
+<div class="container mt-5">
+    <div class="row md-12 justify-content-center">
+        <div class="col-md-12">
+            <div class="card bg-white rounded">
+                <div class="card-header">
+                    <h2>Criar Nome de Etiqueta</h2>
+                </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('etiqueta.store') }}">
-                        @csrf
-                        @if ($errors->any())
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                    <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
                         </div>
-                        @endif
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" name="nome" required>
+                    @endif
+                    <form method="POST" action="{{ route('etiqueta.store') }}">
+                        @csrf
+                        <div class="row md-12 justify-content-center">
+                            <div class="col-md-8">
+                                @include('etiqueta.autocomplete')
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Criar</button>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Criar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

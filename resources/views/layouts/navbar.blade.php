@@ -20,9 +20,8 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {{-- etiqueta nomes --}}
                         <h6 class="dropdown-header bg-secondary text-black">Nomes</h6>
-                        <a class="dropdown-item" href="/etiqueta">Lista</a>
-                        <a class="dropdown-item" href="/etiqueta/create">Incluir</a>
-                        <a class="dropdown-item" href="/etiqueta/editar">Editar</a>
+                        <a class="dropdown-item" href="/etiqueta/create">Criar</a>
+                        <a class="dropdown-item" href="/etiqueta">Editar</a>
                         {{-- Divisória --}}
                         <div class="dropdown-divider"></div>
                         {{-- Carrinho etiquetas --}}

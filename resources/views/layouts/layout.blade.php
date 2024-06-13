@@ -1,7 +1,9 @@
 <!-- resources/views/layouts/layout.blade.php -->
 <!DOCTYPE html>
 <html>
+
 @include('layouts.head')
+
 
 <body>
     <div class="container mt-4">
@@ -43,9 +45,16 @@
 
 
     </script>
-    @include('layouts.main')
-    @include('layouts.footer')
-    <script src="{{ asset('js/autocomplete.js') }}"></script>
+    <main class="main bg-light p-0">
+        @include('layouts.main')
+    </main>
+    <footer class="bg-dark text-white p-3 text-center">
+        <div class="container">
+            <span class="text-muted">
+                @include('layouts.footer')
+            </span>
+        </div>
+    </footer>
 </body>
 
 </html>
