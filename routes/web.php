@@ -46,6 +46,9 @@ Route::group(['prefix' => 'etiqueta'], function () {
     Route::get('/autocomplete', [UtNameController::class, 'autocomplete'])->name('etiqueta.autocomplete');
     // ... outras rotas para gerenciar etiqueta
 });
+Route::get('/timezone', function () {
+    return config('app.timezone').now();
+});
 
 
 Route::group(['prefix' => 'carrinhoEtiqueta'], function () {
@@ -59,6 +62,7 @@ Route::group(['prefix' => 'carrinhoEtiqueta'], function () {
 
     // Rotas de edição
     Route::get('/{id}/edit', [UtController::class, 'edit'])->name('carrinhoEtiqueta.edit'); // Usando o ID do registro
+    Route::post('/{id}/editEtiqueta', [UtController::class, 'editEtiqueta'])->name('carrinhoEtiqueta.editEtiqueta'); // Usando o ID do registro
     Route::put('/{id}/update', [UtController::class, 'update'])->name('carrinhoEtiqueta.update'); // Usando o ID do registro
 
     // Rota de exclusão
@@ -67,5 +71,6 @@ Route::group(['prefix' => 'carrinhoEtiqueta'], function () {
     // Rota de impressão
     Route::put('/{id}/print', [UtController::class, 'print'])->name('carrinhoEtiqueta.print'); // Usando o ID do registro
 
+    Route::get('/listaMesclada', [UtController::class, 'listaMesclada'])->name('carrinhoEtiqueta.listaMesclada');
     // ... outras rotas para gerenciar carrinhoEtiqueta
 });

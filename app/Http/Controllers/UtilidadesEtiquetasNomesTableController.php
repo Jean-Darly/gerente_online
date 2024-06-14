@@ -10,9 +10,15 @@ class UtilidadesEtiquetasNomesTableController extends Controller
 {
     public function index()
     {
-        $etiquetas = UtilidadesEtiquetasNomesTable::all();
+        $parametro = request('search');
+        if ($parametro) {
+            $etiquetas = UtilidadesEtiquetasNomesTable::where('nome', 'like', '%' . $parametro . '%')->paginate(2);
+        } else {
+            $etiquetas = UtilidadesEtiquetasNomesTable::orderBy('id', 'desc')->paginate(2);
+        }
         return view('etiqueta.index', compact('etiquetas'));
     }
+    
 
     public function create()
     {
@@ -51,44 +57,33 @@ class UtilidadesEtiquetasNomesTableController extends Controller
         return view('etiqueta.edit', compact('etiqueta'));
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'nome' => 'required|string|max:255',
-    //     ]);
-
-    //     $etiqueta = UtilidadesEtiquetasNomesTable::findOrFail($id);
-    //     $etiqueta->update($request->all());
-
-    //     return redirect()->route('etiqueta.index')->with('success', 'Registro atualizado com sucesso!');
-    // }
     public function update(Request $request, $id)
-{
-    // Validação do formulário
-    $request->validate([
-        'nome' => 'required|string|max:255|unique:utilidades_etiquetas_nomes_tables,nome,' . $id,
-    ], [
-        'nome.required' => 'O campo nome é obrigatório.',
-        'nome.unique' => 'Este nome já existe. Por favor, escolha um nome diferente.',
-        'nome.max' => 'O nome não pode ter mais de 255 caracteres.',
-    ]);
+    {
+        // Validação do formulário
+        $request->validate([
+            'nome' => 'required|string|max:255|unique:utilidades_etiquetas_nomes_tables,nome,' . $id,
+        ], [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.unique' => 'Este nome já existe. Por favor, escolha um nome diferente.',
+            'nome.max' => 'O nome não pode ter mais de 255 caracteres.',
+        ]);
 
-    try {
-        // Encontra o registro existente
-        $etiqueta = UtilidadesEtiquetasNomesTable::findOrFail($id);
-        // Atualiza o registro
-        $etiqueta->update($request->all());
-        // Redireciona com mensagem de sucesso
-        return redirect()->route('etiqueta.index')->with('success', 'Registro atualizado com sucesso!');
-    } catch (\Illuminate\Database\QueryException $e) {
-        // Captura a exceção de violação de unicidade e redireciona com mensagem de erro
-        if ($e->errorInfo[1] == 1062) {
-            return redirect()->back()->with('error', 'Este nome já existe. Por favor, escolha um nome diferente.');
+        try {
+            // Encontra o registro existente
+            $etiqueta = UtilidadesEtiquetasNomesTable::findOrFail($id);
+            // Atualiza o registro
+            $etiqueta->update($request->all());
+            // Redireciona com mensagem de sucesso
+            return redirect()->route('etiqueta.index')->with('success', 'Registro atualizado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Captura a exceção de violação de unicidade e redireciona com mensagem de erro
+            if ($e->errorInfo[1] == 1062) {
+                return redirect()->back()->with('error', 'Este nome já existe. Por favor, escolha um nome diferente.');
+            }
+            // Captura outras exceções de banco de dados e redireciona com mensagem genérica de erro
+            return redirect()->back()->with('error', 'Ocorreu um erro ao atualizar o registro.');
         }
-        // Captura outras exceções de banco de dados e redireciona com mensagem genérica de erro
-        return redirect()->back()->with('error', 'Ocorreu um erro ao atualizar o registro.');
     }
-}
 
     public function destroy($id)
     {

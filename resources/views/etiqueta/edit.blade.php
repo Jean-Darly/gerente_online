@@ -39,9 +39,9 @@
                 <div class="row mb-3">
                     <label for="actions" class="col-sm-2 col-form-label">Ações</label>
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Salvar</button>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal">Deletar</button>
+                            data-bs-target="#deleteModal"><i class="bi bi-trash"></i> Deletar</button>
                     </div>
                 </div>
             </form>

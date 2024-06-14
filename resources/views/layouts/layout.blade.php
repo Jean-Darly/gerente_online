@@ -5,16 +5,7 @@
 @include('layouts.head')
 
 
-<body>
-    <div class="container mt-4">
-        <div id="alert-message" class="alert alert-dismissible fade show d-none" role="alert">
-            <strong id="alert-content"></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-
+<body class="d-flex flex-column">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var alertMessage = "{{ session('success') }}";
@@ -45,7 +36,7 @@
 
 
     </script>
-    <main class="main bg-light p-0">
+    <main class="main bg-light p-0 flex-grow-1">
         @include('layouts.main')
     </main>
     <footer class="bg-dark text-white p-3 text-center">

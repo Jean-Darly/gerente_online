@@ -1,5 +1,5 @@
 <!-- resources/views/layouts/footer.blade.php -->
-<footer class="footer mt-auto py-3 bg-dark">
+<footer class="bg-dark text-white p-3 text-center mt-auto">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-md-4">

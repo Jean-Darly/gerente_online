@@ -32,7 +32,7 @@
                                 @include('etiqueta.autocomplete')
                             </div>
                             <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary">Criar</button>
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-plus"></i> Criar</button>
                             </div>
                         </div>
                     </form>
