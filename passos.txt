@@ -6,7 +6,7 @@ Aqui estão os 11 principais comandos `php artisan` básicos:
 | `php artisan make:controller NomeController`  | Cria uma nova controladora com o nome especificado.                       |
 | `php artisan make:model NomeModel`            | Cria uma nova modelo com o nome especificado.                             |
 | `php artisan migrate`                         | Executa as migrações do banco de dados.                                   |
-| `php artisan make:migrate none --create=nome` | cria arquivo para fazer as tabelas  e --create=xx cria o up e down() (ops)|
+| `php artisan make:migration xx --create=xx`   | cria arquivo para fazer as tabelas  e --create=xx cria o up e down() (ops)|
 | `php artisan db`                              | Gerencia o banco de dados, incluindo criação e execução de migrações.     |
 | `php artisan make:console HelloWorld`         | Cria um novo comando Artisan com o nome especificado.                     |
 | `php artisan optimize`                        | Otimiza a aplicação, limpando cache e outras tarefas.                     |

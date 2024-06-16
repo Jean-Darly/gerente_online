@@ -4,9 +4,10 @@ use App\Http\Controllers\InsertPersonController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\UtilidadesEtiquetasNomesTableController as UtNameController;
 use App\Http\Controllers\UtilidadesEtiquetasTableController as UtController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UtilidadesEtiquetasConfiguracoesTableController as UtConfController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.welcome');
 Route::get('/users', [UserController::class, 'index']);
@@ -24,6 +25,11 @@ Route::group(['prefix' => 'pessoas'], function () {
 // routes/web.php
 
 Route::group(['prefix' => 'etiqueta'], function () {
+
+    // Rota Index
+    Route::get('/layout', function () {
+        return view('etiqueta.layout');
+    });
 
     // Rota Index
     Route::get('/', [UtNameController::class, 'index'])->name('etiqueta.index');
@@ -73,4 +79,25 @@ Route::group(['prefix' => 'carrinhoEtiqueta'], function () {
 
     Route::get('/listaMesclada', [UtController::class, 'listaMesclada'])->name('carrinhoEtiqueta.listaMesclada');
     // ... outras rotas para gerenciar carrinhoEtiqueta
+});
+
+Route::group(['prefix' => 'configuracaoEtiqueta'], function () {
+
+    // Rota Index
+    Route::get('/', [UtConfController::class, 'index'])->name('configuracaoEtiqueta.index');
+
+    // Rotas de criação
+    Route::get('/create', [UtConfController::class, 'create'])->name('configuracaoEtiqueta.create');
+    Route::post('/store', [UtConfController::class, 'store'])->name('configuracaoEtiqueta.store');
+
+    // Rotas de edição
+    Route::get('/{id}/edit', [UtConfController::class, 'edit'])->name('configuracaoEtiqueta.edit'); // Usando o ID do registro
+    Route::put('/{id}/update', [UtConfController::class, 'update'])->name('configuracaoEtiqueta.update'); // Usando o ID do registro
+
+    // Rota de exclusão
+    Route::delete('/{id}/delete', [UtConfController::class, 'destroy'])->name('configuracaoEtiqueta.delete'); // Usando o ID do registro
+
+    // Rota de impressão
+    Route::put('/{id}/print', [UtConfController::class, 'print'])->name('configuracaoEtiqueta.print'); // Usando o ID do registro
+
 });

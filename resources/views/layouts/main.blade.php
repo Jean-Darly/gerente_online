@@ -5,7 +5,7 @@
     @include('layouts.navbar')
 </header>
 
-<div class="container">
+<div class="container-responsive">
     <!-- Conteúdo da página -->
     @yield('content')
 </div>
