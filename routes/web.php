@@ -27,11 +27,6 @@ Route::group(['prefix' => 'pessoas'], function () {
 Route::group(['prefix' => 'etiqueta'], function () {
 
     // Rota Index
-    Route::get('/layout', function () {
-        return view('etiqueta.layout');
-    });
-
-    // Rota Index
     Route::get('/', [UtNameController::class, 'index'])->name('etiqueta.index');
 
     // Rotas de criação
@@ -53,32 +48,41 @@ Route::group(['prefix' => 'etiqueta'], function () {
     // ... outras rotas para gerenciar etiqueta
 });
 Route::get('/timezone', function () {
-    return config('app.timezone').now();
+    return config('app.timezone') . now();
 });
 
 
-Route::group(['prefix' => 'carrinhoEtiqueta'], function () {
+Route::group(['prefix' => 'etiquetaCarrinho'], function () {
 
-    // Rota Index
-    Route::get('/', [UtController::class, 'index'])->name('carrinhoEtiqueta.index');
+    // Rota Index    // Rota Index
+    Route::get('/layout', function () {
+        return view('etiquetaCarrinho.layout');
+    });
+
+    // Rota Index    // Rota Print
+    Route::put('/print', function () {
+        return view('etiquetaCarrinho.print');
+    });
+
+    Route::get('/', [UtController::class, 'index'])->name('etiquetaCarrinho.index');
 
     // Rotas de criação
-    Route::get('/create', [UtController::class, 'create'])->name('carrinhoEtiqueta.create');
-    Route::post('/store', [UtController::class, 'store'])->name('carrinhoEtiqueta.store');
+    Route::get('/create', [UtController::class, 'create'])->name('etiquetaCarrinho.create');
+    Route::post('/store', [UtController::class, 'store'])->name('etiquetaCarrinho.store');
 
     // Rotas de edição
-    Route::get('/{id}/edit', [UtController::class, 'edit'])->name('carrinhoEtiqueta.edit'); // Usando o ID do registro
-    Route::post('/{id}/editEtiqueta', [UtController::class, 'editEtiqueta'])->name('carrinhoEtiqueta.editEtiqueta'); // Usando o ID do registro
-    Route::put('/{id}/update', [UtController::class, 'update'])->name('carrinhoEtiqueta.update'); // Usando o ID do registro
+    Route::get('/{id}/edit', [UtController::class, 'edit'])->name('etiquetaCarrinho.edit'); // Usando o ID do registro
+    Route::post('/{id}/editEtiqueta', [UtController::class, 'editEtiqueta'])->name('etiquetaCarrinho.editEtiqueta'); // Usando o ID do registro
+    Route::put('/{id}/update', [UtController::class, 'update'])->name('etiquetaCarrinho.update'); // Usando o ID do registro
 
     // Rota de exclusão
-    Route::delete('/{id}/delete', [UtController::class, 'destroy'])->name('carrinhoEtiqueta.delete'); // Usando o ID do registro
+    Route::delete('/{id}/delete', [UtController::class, 'destroy'])->name('etiquetaCarrinho.delete'); // Usando o ID do registro
 
     // Rota de impressão
-    Route::put('/{id}/print', [UtController::class, 'print'])->name('carrinhoEtiqueta.print'); // Usando o ID do registro
+    Route::put('/{id}/print', [UtController::class, 'print'])->name('etiquetaCarrinho.print'); // Usando o ID do registro
 
-    Route::get('/listaMesclada', [UtController::class, 'listaMesclada'])->name('carrinhoEtiqueta.listaMesclada');
-    // ... outras rotas para gerenciar carrinhoEtiqueta
+    Route::get('/listaMesclada', [UtController::class, 'listaMesclada'])->name('etiquetaCarrinho.listaMesclada');
+    // ... outras rotas para gerenciar etiquetaCarrinho
 });
 
 Route::group(['prefix' => 'configuracaoEtiqueta'], function () {
