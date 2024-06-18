@@ -51,7 +51,6 @@ Route::get('/timezone', function () {
     return config('app.timezone') . now();
 });
 
-
 Route::group(['prefix' => 'etiquetaCarrinho'], function () {
 
     // Rota Index    // Rota Index
@@ -59,10 +58,10 @@ Route::group(['prefix' => 'etiquetaCarrinho'], function () {
         return view('etiquetaCarrinho.layout');
     });
 
-    // Rota Index    // Rota Print
-    Route::put('/print', function () {
-        return view('etiquetaCarrinho.print');
-    });
+    // // Rota Index    // Rota Print
+    // Route::put('/print', function () {
+    //     return view('etiquetaCarrinho.print');
+    // });
 
     Route::get('/', [UtController::class, 'index'])->name('etiquetaCarrinho.index');
 
@@ -79,7 +78,7 @@ Route::group(['prefix' => 'etiquetaCarrinho'], function () {
     Route::delete('/{id}/delete', [UtController::class, 'destroy'])->name('etiquetaCarrinho.delete'); // Usando o ID do registro
 
     // Rota de impressão
-    Route::put('/{id}/print', [UtController::class, 'print'])->name('etiquetaCarrinho.print'); // Usando o ID do registro
+    Route::put('/print', [UtController::class, 'print'])->name('etiquetaCarrinho.print'); // Usando o ID do registro
 
     Route::get('/listaMesclada', [UtController::class, 'listaMesclada'])->name('etiquetaCarrinho.listaMesclada');
     // ... outras rotas para gerenciar etiquetaCarrinho

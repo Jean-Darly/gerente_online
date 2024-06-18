@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\UtilidadesEtiquetasTable;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Log;
+use App\Models\UtilidadesEtiquetasConfiguracoesTable;
 
 class UtilidadesEtiquetasTableController extends Controller
 {
@@ -50,12 +50,6 @@ class UtilidadesEtiquetasTableController extends Controller
         ]);
 
         try {
-            // Criação da etiqueta
-            //para mandar para o banco todos os campos
-            // == >> UtilidadesEtiquetasTable::create($request->all());
-            // Remove o campo _token dos dados do request
-            // UtilidadesEtiquetasTable::create($request->except('_token'));
-
             // Permitir apenas os campos especificados
             UtilidadesEtiquetasTable::create($request->only(['id_etiqueta', 'validade', 'quantidade', 'obs', 'status']));
 
@@ -149,5 +143,14 @@ class UtilidadesEtiquetasTableController extends Controller
         $etiqueta->delete();
 
         return redirect()->route('etiquetaCarrinho.index')->with('success', 'Registro excluído com sucesso!');
+    }    
+    public function print()
+    {
+        // return config('app.timezone') . now();
+        $layoutEtiquetas = UtilidadesEtiquetasConfiguracoesTable::all()->where('status',1);
+        $carrinhoEtiquetas = UtilidadesEtiquetasTable::select('utilidades_etiquetas_tables.*', 'utilidades_etiquetas_nomes_tables.nome')
+        ->join('utilidades_etiquetas_nomes_tables', 'utilidades_etiquetas_tables.id_etiqueta', '=', 'utilidades_etiquetas_nomes_tables.id')
+        ->get();
+        return view('etiquetaCarrinho.print', compact('carrinhoEtiquetas','layoutEtiquetas'));
     }
 }
