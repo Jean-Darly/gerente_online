@@ -53,54 +53,51 @@ Route::get('/timezone', function () {
 
 Route::group(['prefix' => 'etiquetaCarrinho'], function () {
 
-    // Rota Index    // Rota Index
-    Route::get('/layout', function () {
-        return view('etiquetaCarrinho.layout');
-    });
-
+    
     // // Rota Index    // Rota Print
     // Route::put('/print', function () {
-    //     return view('etiquetaCarrinho.print');
-    // });
-
-    Route::get('/', [UtController::class, 'index'])->name('etiquetaCarrinho.index');
-
-    // Rotas de criação
-    Route::get('/create', [UtController::class, 'create'])->name('etiquetaCarrinho.create');
-    Route::post('/store', [UtController::class, 'store'])->name('etiquetaCarrinho.store');
-
-    // Rotas de edição
-    Route::get('/{id}/edit', [UtController::class, 'edit'])->name('etiquetaCarrinho.edit'); // Usando o ID do registro
-    Route::post('/{id}/editEtiqueta', [UtController::class, 'editEtiqueta'])->name('etiquetaCarrinho.editEtiqueta'); // Usando o ID do registro
-    Route::put('/{id}/update', [UtController::class, 'update'])->name('etiquetaCarrinho.update'); // Usando o ID do registro
-
-    // Rota de exclusão
-    Route::delete('/{id}/delete', [UtController::class, 'destroy'])->name('etiquetaCarrinho.delete'); // Usando o ID do registro
-
-    // Rota de impressão
-    Route::put('/print', [UtController::class, 'print'])->name('etiquetaCarrinho.print'); // Usando o ID do registro
+        //     return view('etiquetaCarrinho.print');
+        // });
+        
+        Route::get('/', [UtController::class, 'index'])->name('etiquetaCarrinho.index');
+        
+        // Rotas de criação
+        Route::get('/create', [UtController::class, 'create'])->name('etiquetaCarrinho.create');
+        Route::post('/store', [UtController::class, 'store'])->name('etiquetaCarrinho.store');
+        
+        // Rotas de edição
+        Route::get('/{id}/edit', [UtController::class, 'edit'])->name('etiquetaCarrinho.edit'); // Usando o ID do registro
+        Route::post('/{id}/editEtiqueta', [UtController::class, 'editEtiqueta'])->name('etiquetaCarrinho.editEtiqueta'); // Usando o ID do registro
+        Route::put('/{id}/update', [UtController::class, 'update'])->name('etiquetaCarrinho.update'); // Usando o ID do registro
+        
+        // Rota de exclusão
+        Route::delete('/{id}/delete', [UtController::class, 'destroy'])->name('etiquetaCarrinho.delete'); // Usando o ID do registro
+        
+        // Rota de impressão
+        Route::put('/print', [UtController::class, 'print'])->name('etiquetaCarrinho.print'); // Usando o ID do registro
+        Route::get('/layout', [UtController::class, 'layout'])->name('etiquetaCarrinho.layout');
 
     Route::get('/listaMesclada', [UtController::class, 'listaMesclada'])->name('etiquetaCarrinho.listaMesclada');
     // ... outras rotas para gerenciar etiquetaCarrinho
 });
 
-Route::group(['prefix' => 'configuracaoEtiqueta'], function () {
+Route::group(['prefix' => 'etiquetaConfiguracao'], function () {
 
     // Rota Index
-    Route::get('/', [UtConfController::class, 'index'])->name('configuracaoEtiqueta.index');
+    Route::get('/', [UtConfController::class, 'index'])->name('etiquetaConfiguracao.index');
 
     // Rotas de criação
-    Route::get('/create', [UtConfController::class, 'create'])->name('configuracaoEtiqueta.create');
-    Route::post('/store', [UtConfController::class, 'store'])->name('configuracaoEtiqueta.store');
+    Route::get('/create', [UtConfController::class, 'create'])->name('etiquetaConfiguracao.create');
+    Route::put('/store', [UtConfController::class, 'store'])->name('etiquetaConfiguracao.store');
 
     // Rotas de edição
-    Route::get('/{id}/edit', [UtConfController::class, 'edit'])->name('configuracaoEtiqueta.edit'); // Usando o ID do registro
-    Route::put('/{id}/update', [UtConfController::class, 'update'])->name('configuracaoEtiqueta.update'); // Usando o ID do registro
+    Route::get('/{id}/edit', [UtConfController::class, 'edit'])->name('etiquetaConfiguracao.edit'); // Usando o ID do registro
+    Route::put('/{id}/update', [UtConfController::class, 'update'])->name('etiquetaConfiguracao.update'); // Usando o ID do registro
 
     // Rota de exclusão
-    Route::delete('/{id}/delete', [UtConfController::class, 'destroy'])->name('configuracaoEtiqueta.delete'); // Usando o ID do registro
+    Route::delete('/{id}/delete', [UtConfController::class, 'destroy'])->name('etiquetaConfiguracao.delete'); // Usando o ID do registro
 
     // Rota de impressão
-    Route::put('/{id}/print', [UtConfController::class, 'print'])->name('configuracaoEtiqueta.print'); // Usando o ID do registro
+    Route::put('/{id}/print', [UtConfController::class, 'print'])->name('etiquetaConfiguracao.print'); // Usando o ID do registro
 
 });

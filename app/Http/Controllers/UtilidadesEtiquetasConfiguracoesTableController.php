@@ -15,7 +15,7 @@ class UtilidadesEtiquetasConfiguracoesTableController extends Controller
     {
         $configuracoes = UECT::all();
 
-        return view('configuracaoEtiqueta.index', compact('configuracoes'));
+        return view('etiquetaConfiguracao.index', compact('configuracoes'));
     }
 
     /**
@@ -31,9 +31,60 @@ class UtilidadesEtiquetasConfiguracoesTableController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
+        Log::info('Dados recebidos: ', $request->all());
+    
+        try {
+            // Validação dos dados recebidos
+            $validatedData = $request->validate([
+                'nome' => 'required|max:255',
+                'altura_etiqueta' => 'required|numeric',
+                'largura_etiqueta' => 'required|numeric',
+                'qt_coluna_pagina' => 'required|integer',
+                'qt_linha_pagina' => 'required|integer',
+                'margem_etiqueta_topo' => 'required|numeric',
+                'margem_etiqueta_esquerda' => 'required|numeric',
+                'margem_etiqueta_direita' => 'required|numeric',
+                'margem_etiqueta_rodape' => 'required|numeric',
+                'margem_pagina_topo' => 'required|numeric',
+                'margem_pagina_esquerda' => 'required|numeric',
+                'margem_pagina_direita' => 'required|numeric',
+                'margem_pagina_rodape' => 'required|numeric',
+                'tamanhoFonteL01' => 'required|integer',
+                'tamanhoFonteL02' => 'required|integer',
+                'tamanhoFonteL03' => 'required|integer',
+                'tamanhoFonteL04' => 'required|integer',
+            ]);
+    
+            // Trata o campo status
+            $newStatus = $request->has('status') ? 1 : 0;
+    
+            // Se o novo status for 1, desativa todos os outros registros
+            if ($newStatus == 1) {
+                UECT::where('status', 1)->update(['status' => 0]);
+            }
+    
+            // Cria um novo registro
+            $etiquetaConfiguracao = UECT::create($validatedData + ['status' => $newStatus]);
+    
+            // Redireciona com mensagem de sucesso
+            return redirect()->route('configuracaoEtiqueta.index')->with('success', 'Novo registro criado com sucesso!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Erro de validação: ', $e->errors());
+            return redirect()->back()->withErrors($e->errors());
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::error('Erro de consulta ao banco de dados: ', $e->errorInfo);
+            // Captura a exceção de violação de unicidade e redireciona com mensagem de erro
+            if ($e->errorInfo[1] == 1062) {
+                return redirect()->back()->with('error', 'Este nome já existe. Por favor, escolha um nome diferente.');
+            }
+            // Captura outras exceções de banco de dados e redireciona com mensagem genérica de erro
+            return redirect()->back()->with('error', 'Ocorreu um erro ao criar o registro.');
+        } catch (\Exception $e) {
+            Log::error('Erro inesperado: ', ['exception' => $e]);
+            return redirect()->back()->with('error', 'Ocorreu um erro inesperado. Por favor, tente novamente.');
+        }
     }
+    
 
     /**
      * Display the specified resource.

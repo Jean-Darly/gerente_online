@@ -33,7 +33,12 @@ foreach ($layoutEtiquetas as $loe) {
     $created_at = $loe['created_at'];
     $updated_at = $loe['updated_at'];
 }
+
 $coordenadas = isset($_POST['coordenadas']) ? $_POST['coordenadas'] : null;
+$coordenadasCinza = isset($_POST['coordenadasCinza']) ? $_POST['coordenadasCinza'] : null;
+$cor = isset($_POST['cor']) ? $_POST['cor'] : 'laranja';
+if ($cor=="cinza") $coordenadas=$coordenadasCinza;
+if ($cor=="laranja") $coordenadas=null;
 
 $style = "
     @page {
@@ -44,14 +49,14 @@ $style = "
     body {
         margin: 0;
         padding: 0;
-        font-family: 'Ubuntu', sans-serif;
+        font-family: Ubuntu, sans-serif;
     }
 
     .rectangle {
         width: {$largura_etiqueta}mm;
         height: {$altura_etiqueta}mm;
         margin: {$margem_etiqueta_topo}mm {$margem_etiqueta_direita}mm {$margem_etiqueta_rodape}mm {$margem_etiqueta_esquerda}mm;
-        border: 1px solid black;
+        border: 1px solid white;
         display: inline-block;
         vertical-align: top;
     }

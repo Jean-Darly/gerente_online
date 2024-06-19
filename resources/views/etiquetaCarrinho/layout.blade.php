@@ -7,8 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
     @php
-        $col = 6;
-        $row = 16;
+        $col = isset($layoutEtiquetas[0]['qt_coluna_pagina']) ?$layoutEtiquetas[0]['qt_coluna_pagina'] : 6;
+        $row = isset($layoutEtiquetas[0]['qt_linha_pagina']) ?$layoutEtiquetas[0]['qt_linha_pagina'] : 16;
+        $coordenadasCinza=null;
     @endphp
 
     <script>
@@ -33,21 +34,36 @@
 
                 // Verificar se o elemento buttonValue existe no coordenadas
                 var index = coordenadas.indexOf('(' + buttonValue + ')');
+
+                
                 if (index !== -1) {
                     // Remove coordenada no array o elemento do buttonValue
                     cinza--;
+                    
+                    // EXCLUI o valor da coordenada no input coordenadaCinza
                     coordenadas.splice(index, 1);
                     $('#coordenadas').val(coordenadas);
+                    
+                    var w = $("#coordenadasCinza").val();
+                    $("#coordenadasCinza").val(w+'(' + buttonValue + '),');
+
                     $(this).removeClass('bg-secondary');
                     $(this).addClass('bg-primary');
-                } else {
-                    // Insere coordenada no array o elemento do buttonValue
-                    cinza++;
-                    coordenadas.push('(' + buttonValue + ')');
-                    $('#coordenadas').val(coordenadas);
-                    $(this).removeClass('bg-primary');
-                    $(this).addClass('bg-secondary');
-                }
+                    
+                    } else {
+                        
+                        // Insere coordenada no array o elemento do buttonValue
+                        cinza++;
+                        // EXCLUI o valor da coordenada no input coordenada
+                        coordenadas.push('(' + buttonValue + ')');
+                        $('#coordenadas').val(coordenadas);
+
+                        var w = $("#coordenadasCinza").val().replace('(' + buttonValue + '),', "");
+                        $("#coordenadasCinza").val(w);
+                        
+                        $(this).removeClass('bg-primary');
+                        $(this).addClass('bg-secondary');
+                    }
                 // alert(coordenadas);s
             });
         });
@@ -68,6 +84,11 @@
                             <div class="row mb-1">
                                 @for ($c = 1; $c <= $col; $c++)
                                     <div class="col">
+                                        @php
+                                        $valorLinha=$r < 10 ? "0" . $r : $r;
+                                        $valorColuna=$c < 10 ? "0" . $c : $c;
+                                        $coordenadasCinza=$coordenadasCinza."(".$valorLinha.",".$valorColuna."),"
+                                        @endphp
                                         <button type="button" value="{{$r < 10 ? "0" . $r : $r}},{{$c < 10 ? "0" . $c : $c}}"
                                             id="jean" style="width:100%;"
                                             class="text-white btn btn-outline-secondary bg-primary">
@@ -118,6 +139,7 @@
                                         class="text-dark btn btn-outline-dark bg-warning" name="Laranja">
                                     <input type="text" name="coordenadas" id="coordenadas">
                                     <input type="text" name="cor" id="cor">
+                                    <input type="text" name="coordenadasCinza" id="coordenadasCinza" value="{{ $coordenadasCinza }}">
                                 </div>
                             </div>
                         </div>

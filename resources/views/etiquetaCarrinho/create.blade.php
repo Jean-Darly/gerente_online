@@ -11,7 +11,7 @@
             <h2>Adicionar Nova Etiqueta</h2>
         </div>
         <div class="card-body">
-            <form id="etiquetaForm" method="POST" action="{{ route('carrinhoEtiqueta.store') }}">
+            <form id="etiquetaForm" method="POST" action="{{ route('etiquetaCarrinho.store') }}">
                 @csrf
                 <div class="row md-12">
                     <div class="col-md-3">
@@ -21,7 +21,7 @@
                     <div class="col-md-2">
                         <label for="validade" class="form-label">Validade</label>
                         <input type="date" class="form-control" id="validade" name="validade"
-                            value="{{ old('validade') }}">
+                            value="{{ old('validade') }}" min="{{ now()->addDay()->toDateString() }}">
                     </div>
                     <div class="col-md-1">
                         <label for="quantidade" class="form-label">Quantidade</label>

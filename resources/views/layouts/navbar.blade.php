@@ -26,9 +26,12 @@
                         <div class="dropdown-divider"></div>
                         {{-- Carrinho etiquetas --}}
                         <h6 class="dropdown-header bg-secondary text-black">Carrinho Etiquetas</h6>
-                        <a class="dropdown-item" href="/carrinhoEtiqueta/create">Criar</a>
-                        <a class="dropdown-item" href="/carrinhoEtiqueta/edit">Editar</a>
-                        <a class="dropdown-item" href="/carrinhoEtiqueta/print">Imprimir</a>
+                        <a class="dropdown-item" href="/etiquetaCarrinho/create">Criar</a>
+                        <a class="dropdown-item" href="/etiquetaCarrinho/layout" target="_blank">Imprimir</a>
+                        <div class="dropdown-divider"></div>
+                        {{-- Layout etiquetas --}}
+                        <h6 class="dropdown-header bg-secondary text-black">Configurações das Etiquetas</h6>
+                        <a class="dropdown-item" href="/etiquetaConfiguracao/">Criar ou Editar</a>
                     </div>
                 </li>
                 <li class="nav-item">

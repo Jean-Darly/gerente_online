@@ -21,17 +21,17 @@ class UtilidadesEtiquetasTableController extends Controller
     {
         // Define a data de hoje corretamente no timezone do servidor
         $today = Carbon::today();//date('Y-m-d 00:00:00');
-    
+
         $etiquetasQuery = UtilidadesEtiquetasTable::select('utilidades_etiquetas_tables.*', 'utilidades_etiquetas_nomes_tables.nome')
             ->join('utilidades_etiquetas_nomes_tables', 'utilidades_etiquetas_tables.id_etiqueta', '=', 'utilidades_etiquetas_nomes_tables.id')
             ->where('utilidades_etiquetas_tables.created_at', '>=', $today);
-            // ->where('utilidades_etiquetas_tables.status', 1);
-    
+        // ->where('utilidades_etiquetas_tables.status', 1);
+
         // Exibir a consulta SQL gerada
         // dd($etiquetasQuery->toSql(), $etiquetasQuery->getBindings());
-    
+
         $etiquetas = $etiquetasQuery->get();
-    
+
         return view('etiquetaCarrinho.create', compact('etiquetas'));
     }
 
@@ -95,7 +95,7 @@ class UtilidadesEtiquetasTableController extends Controller
             $etiqueta->save();
 
             // Redirecionar de volta para a mesma view com uma mensagem de sucesso
-            return redirect()->route('carrinhoEtiqueta.create')->with('success', 'Etiqueta ( ::: '.$request->nome.' ::: ) atualizada com sucesso!')->withInput();
+            return redirect()->route('carrinhoEtiqueta.create')->with('success', 'Etiqueta ( ::: ' . $request->nome . ' ::: ) atualizada com sucesso!')->withInput();
         } catch (\Exception $e) {
             // Em caso de erro, redirecionar de volta com mensagem de erro
             return redirect()->back()->with('error', 'Erro ao atualizar etiqueta para impressão: ' . $e->getMessage())->withInput();
@@ -143,14 +143,22 @@ class UtilidadesEtiquetasTableController extends Controller
         $etiqueta->delete();
 
         return redirect()->route('etiquetaCarrinho.index')->with('success', 'Registro excluído com sucesso!');
-    }    
+    }
     public function print()
     {
         // return config('app.timezone') . now();
-        $layoutEtiquetas = UtilidadesEtiquetasConfiguracoesTable::all()->where('status',1);
+        $layoutEtiquetas = UtilidadesEtiquetasConfiguracoesTable::all()->where('status', 1);
         $carrinhoEtiquetas = UtilidadesEtiquetasTable::select('utilidades_etiquetas_tables.*', 'utilidades_etiquetas_nomes_tables.nome')
-        ->join('utilidades_etiquetas_nomes_tables', 'utilidades_etiquetas_tables.id_etiqueta', '=', 'utilidades_etiquetas_nomes_tables.id')
-        ->get();
-        return view('etiquetaCarrinho.print', compact('carrinhoEtiquetas','layoutEtiquetas'));
+            ->join('utilidades_etiquetas_nomes_tables', 'utilidades_etiquetas_tables.id_etiqueta', '=', 'utilidades_etiquetas_nomes_tables.id')
+            ->get();
+        return view('etiquetaCarrinho.print', compact('carrinhoEtiquetas', 'layoutEtiquetas'));
+    }
+    public function layout()
+    {
+        // return config('app.timezone') . now();		
+        $layoutEtiquetas = UtilidadesEtiquetasConfiguracoesTable::select('nome', 'qt_linha_pagina', 'qt_coluna_pagina')
+            ->where('status', 1)
+            ->get();
+        return view('etiquetaCarrinho.layout', compact('layoutEtiquetas'));
     }
 }
