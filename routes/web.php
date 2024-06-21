@@ -101,3 +101,12 @@ Route::group(['prefix' => 'etiquetaConfiguracao'], function () {
     Route::put('/{id}/print', [UtConfController::class, 'print'])->name('etiquetaConfiguracao.print'); // Usando o ID do registro
 
 });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

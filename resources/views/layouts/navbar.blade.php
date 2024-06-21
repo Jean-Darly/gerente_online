@@ -40,6 +40,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/pessoas/edit">Editar Pessoas</a>
                 </li>
+                <!-- Navbar para usuários autenticados -->
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                    </li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <div class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); this.closest('form').submit();" role="button">
+                                <i class="fas fa-sign-out-alt"></i> Sair
+                            </a>
+                        </div>
+                    </form>
+
+                @endauth
+
+                <!-- Navbar para usuários não autenticados -->
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Entrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">Registrar</a>
+                    </li>
+                @endguest
             </ul>
         </div>
     </div>
