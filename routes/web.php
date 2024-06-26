@@ -110,3 +110,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+Route::get('/teamsTest', function () {
+    $user = auth()->user();
+    $currentTeam = $user->currentTeam;
+
+    return response()->json($currentTeam);
+});
